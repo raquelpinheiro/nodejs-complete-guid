@@ -1,0 +1,22 @@
+.users-form {
+    display:block;
+    padding: 0 1.5rem;
+}
+.users-form input {
+    border: 1px solid #4941db;
+    font: inherit;
+    border-radius: 2px; 
+}
+.users-form-div {
+    margin-bottom: 1.5rem;
+}
+.users-form-div button {
+    background-color: #3c8787;    
+    border-radius: 4px;
+    border: 1px solid #0b5555;
+}
+.user-form-div button:hover {
+    font-style: italic;
+    display: block;
+    background-color: #053b3b;
+}

@@ -1,9 +1,12 @@
-
+/*
+    Doing the same that ``slice`` function: clone an object or array like as value reference
+*/
 function spreadOperator() {
 
     let hobbies = ['Walking', 'Movies'];
     console.log(hobbies);
 
+    // clone an array as value / immutable
     let copyHobbies = hobbies.slice();
     console.log(copyHobbies);
 
