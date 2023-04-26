@@ -1,0 +1,32 @@
+.main-header {
+    width: 100%;
+    height: 30%;
+    border-radius: 10px;
+    border-color: whitesmoke;
+    background-color: rgb(7, 73, 73);
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.main-header_nav {
+    align-items: center;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+.main-header_nav__list {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.main-header_nav__list_item {
+    padding-left: 1rem;
+    padding-right: 1.5rem;
+}
+
+.main-header_nav__list_item a {
+    text-decoration: none;
+    color: white;
+}

@@ -1,0 +1,8 @@
+block content 
+    h1 Users
+        if hasUsers
+            ul
+                each user in users 
+                    li #{user.userName}
+        else
+            h2 Users not foud

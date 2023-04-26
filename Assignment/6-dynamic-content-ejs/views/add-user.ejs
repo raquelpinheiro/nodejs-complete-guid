@@ -1,0 +1,11 @@
+<%- include('includes/head.ejs') %>
+</head>
+<body>
+    <% include('includes/nav.ejs') %>
+    <h1>Users</h1>
+    <form action="/add-user" method="post">
+        <input type="text" name="userName" />
+        <button>Add</button>
+    </form>
+</body>
+</html>    

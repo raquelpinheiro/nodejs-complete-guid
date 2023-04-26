@@ -1,0 +1,14 @@
+<%- include('includes/head.ejs') %>
+</head>
+<body>
+    <%- include('includes/nav.ejs') %>
+    <h1>Users</h1>
+    <% if(hasUsers) { %>
+        <ul>
+            <% users.forEach((user) => { %>
+                <li><%= user.userName %></li>
+            <% }) %>
+        </ul>
+    <% } %>
+</body>
+</html>

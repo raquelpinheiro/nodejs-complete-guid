@@ -3,7 +3,7 @@ const router = express.Router();
 const path = require('path');
 const productData = require('./add-product');
 
-router.get("/", (req, res, next) =>{
+router.get('/', (req, res, next) =>{
     console.log(`Products: ${productData.products.map(p => p.title)}`);
     res.render('shop', 
             { prods: productData.products, 

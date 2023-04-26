@@ -1,0 +1,19 @@
+.users-form {
+    width: 20rem;
+    max-width: 90%;
+    margin: auto;
+}
+
+.users-item {
+    width: 20rem;
+    max-width: 95%;
+}
+
+.users__title {
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.users__name {
+    text-align: center;
+}
