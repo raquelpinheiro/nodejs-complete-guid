@@ -17,7 +17,10 @@ module.exports = class Cart {
                 console.log(err);
                 return;
             }
-            this.cart = JSON.parse(buffer);
+            if (buffer.byteLength !== 0)
+                this.cart = JSON.parse(buffer);
+            else
+                this.cart = { products: [], totalPrice: 0 };
 
             const index = this.cart.products.findIndex(p => p.id === id);
 
@@ -45,19 +48,21 @@ module.exports = class Cart {
             if (err) {
                 return;
             }
-            this.cart = JSON.parse(buffer);
 
-            const updatedCart = { ...this.cart };
+            if (buffer.byteLength !== 0)
+                this.cart = JSON.parse(buffer);
+            else
+                this.cart = { products: [], totalPrice: 0 };
 
-            const deleteProduct = updatedCart.products.find(p => p.id === productId);
+            const deleteProduct = this.cart.products.find(p => p.id === productId);
 
             if (!deleteProduct)
                 return;
 
-            updatedCart.totalPrice = updatedCart.totalPrice - deleteProduct.price;
-            updatedCart.products = updatedCart.products.filter(p => p.id !== productId);
+            this.cart.totalPrice = this.cart.totalPrice - deleteProduct.price;
+            this.cart.products = this.cart.products.filter(p => p.id !== productId);
 
-            fs.writeFile(p, JSON.stringify(updatedCart), (err) => {
+            fs.writeFile(p, JSON.stringify(this.cart), (err) => {
                 if (err)
                     console.error(err);
             });
@@ -68,8 +73,15 @@ module.exports = class Cart {
             if (err) {
                 return;
             }
-            this.cart = JSON.parse(buffer);
             let detailsCart = { products: [], totalPrice: 0 };
+
+            if (buffer.byteLength !== 0){
+                this.cart = JSON.parse(buffer);
+                detailsCart.totalPrice = this.cart.totalPrice;
+            }
+            else{
+                this.cart = detailsCart;
+            }               
 
             for (let prod of this.cart.products) {
                 let productCart = {};
@@ -77,14 +89,11 @@ module.exports = class Cart {
                     productCart = { ...product };
                     productCart.price = prod.price;
                     productCart.quantity = prod.quantity;
-                    detailsCart.products.push(productCart);
+                    detailsCart.products.push(productCart);                   
 
-                    detailsCart.totalPrice = this.cart.totalPrice;
-                    console.log(detailsCart);
                     cb(detailsCart);
                 });
             };
-
         });
     }
 }

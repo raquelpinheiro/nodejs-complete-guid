@@ -66,8 +66,8 @@ exports.postCart = (req, res, next) => {
   res.redirect('/cart');
 };
 
-exports.postCartDeleteItem = (req, res, next => {
+exports.postCartDeleteItem = (req, res, next) => {
   const productId = req.body.productId;
   Cart.deleteProduct(productId);
   res.redirect('/cart');
-});
+};
