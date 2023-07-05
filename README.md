@@ -59,12 +59,28 @@ Getting one or more attributes from object or array without access the ``object.
 - Code asynchronous is executed after synchronous code have done
 - The asynchronous code is executed because the JavaScript knows that a callback function exists and this must be executed
 
-### 2.3 Import package ###
+## 4. Dev Workflow and Debugging ##
 
-Using a first capital letter, it will instance a class.
+### Install packages into two mode: development and production ###
 
-``` const Sequelize = require('sequelize'); ```
-``` const instanceSequelize = new Sequelize();```
+- Development: the package is useful only during development phase
+``npm install nodemon --save-dev``
+
+- Prodution: the package will be used to executing application
+``npm install nodemon --save``
+
+- Global: the package will be installed on machine
+``npm install -g nodemon``
+
+``node_modules`` directory doesn't need to be versioned or shared. The modules can be restored and the directory recreated only executing ``npm install``
+
+### npm commands ###
+
+Add npm manager to the project
+``npm start``
+
+Restore packages e recreate the ``node_modules`` directory
+``npm install``
 
 ## 9 - Dynamic routes and advanced models ##
 
@@ -79,4 +95,25 @@ Different ways to pick up parameters:
 
 ## 10 - SQL Introduction ##
 
+### Connecting MySql database using MySql2 package ###
+
+``npm install --save mysql2 ``
+
+1. **All SQL operations are done with code inline SQL**
+1. You must have writing SQL statements on code and this give you a control about SQL commands
+
+
+## 11. Sequelize ORM ##
+
 Sequelize is a ORM - Object Relational Mapper like Entity Framework
+
+1. **All SQL operations are done without code inline SQL**
+1. You don't have writing SQL statements on code
+
+### 11.1 Import package ###
+
+Using a first capital letter, it will instance a class.
+
+``` const Sequelize = require('sequelize'); ```
+``` const instanceSequelize = new Sequelize();```
+
