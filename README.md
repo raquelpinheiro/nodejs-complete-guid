@@ -59,6 +59,13 @@ Getting one or more attributes from object or array without access the ``object.
 - Code asynchronous is executed after synchronous code have done
 - The asynchronous code is executed because the JavaScript knows that a callback function exists and this must be executed
 
+### 2.3 Import package ###
+
+Using a first capital letter, it will instance a class.
+
+``` const Sequelize = require('sequelize'); ```
+``` const instanceSequelize = new Sequelize();```
+
 ## 9 - Dynamic routes and advanced models ##
 
 Register a route with parameters:
@@ -69,3 +76,7 @@ Different ways to pick up parameters:
 - Parameter route: ```req.params.id```
 - Body from html form: ```req.body.id```
 - Query string: ```req.query.id```
+
+## 10 - SQL Introduction ##
+
+Sequelize is a ORM - Object Relational Mapper like Entity Framework
