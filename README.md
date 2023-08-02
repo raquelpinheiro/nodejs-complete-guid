@@ -117,3 +117,11 @@ Using a first capital letter, it will instance a class.
 ``` const Sequelize = require('sequelize'); ```
 ``` const instanceSequelize = new Sequelize();```
 
+## 12. NoSql MongoDB using mongodb package ##
+
+Pull and run a MongoDB Docker imagem:
+
+```  ```
+
+https://www.mongodb.com/compatibility/docker
+https://www.mongodb.com/docs/manual/tutorial/install-mongodb-community-with-docker/
