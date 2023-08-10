@@ -26,16 +26,15 @@ class Product {
     const db = getDb();
     return db.collection('products').find({}).toArray()
       .then(products => {
-        console.log(`All products: ${products}`);
         return products;
       }).catch(err => console.error(err));
   }
   static findById(productId) {
     const db = getDb();
-    return db.collection('products').findOne({ _id: new MongoDb.ObjectId(productId) })
+    return db.collection('products').find({ _id: new MongoDb.ObjectId(productId) })
       .next()
       .then(product => {
-        console.log(`Product: ${product}`);
+        console.log(`Product: ${JSON.stringify(product)}`);
         return product;
       }).catch(err => console.error(err));
   };

@@ -23,10 +23,11 @@ app.use((req, res, next) => {
 
   User.findByNameEmail('raquel', 'raqueljpinheiro@gmail.com')
     .then(user => {
-      req.user = user;
+      //req.user = Object.assign(new User('', ''), user);
+      req.user = Object.assign(User.prototype, user);
+      next();
     })
-    .catch(err => console.log(err));
-  next();
+    .catch(err => console.log(err)); 
 });
 
 app.use('/admin', adminRoutes);
