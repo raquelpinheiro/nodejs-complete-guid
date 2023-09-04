@@ -36,7 +36,7 @@ class User {
     if (!this.hasOwnProperty('cart')) {
       this.cart = { items: [{ productId: new MongoDb.ObjectId(product._id), quantity: 1 }], totalPrice: product.price };
     } else {
-      if (this.cart.items.includes(c => c.id === product._id)) {
+      if (this.cart.items.some(c => c.id === product._id)) {
         let productIndex = this.cart.items.findIndex(p => p.id === product._id);
         let productCart = this.cart.items[productIndex];
         productCart.quantity += 1;
@@ -75,7 +75,7 @@ class User {
       .catch(err => console.error(err));
   }
   removeItemFromCart(productId) {
-    const cartItems = this.cart.items.find(c => c.productId !== productId);
+    const cartItems = this.cart.items.filter(c => c.productId !== productId);
     const db = getDb();
     return db.collection('users')
       .updateOneOne({ _id: new MongoDb.ObjectId(this._id) }, { $set: {cart: cartItems }})
