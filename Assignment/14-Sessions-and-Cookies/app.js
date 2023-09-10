@@ -32,19 +32,6 @@ app.use(session({
   saveUninitialized: false, store: store
 }));
 
-// Adiciona o usuário no contexto da requisição
-app.use((req, res, next) => {
-  if (!req.session.user) {
-    User.findOne({ name: 'Raquel' })
-      .then(user => {
-        if (user)
-          req.session.user = user;       
-      })
-      .catch(err => console.log(err));
-  }
-  next();
-});
-
 app.use('/admin', adminRoutes);
 app.use(shopRoutes);
 app.use(authRoutes);

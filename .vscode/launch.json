@@ -6,7 +6,7 @@
             "name": "Run Script: npm start",
             "request": "launch",
             "command": "npm start",
-            "cwd": "${workspaceFolder}\\Assignment\\14-Sessions-and-Cookies"
+            "cwd": "${workspaceFolder}\\14-Sessions-and-Cookies"
         }
     ]
 }

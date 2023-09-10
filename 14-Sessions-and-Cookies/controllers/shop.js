@@ -3,12 +3,11 @@ const Product = require('../models/product');
 exports.getProducts = (req, res, next) => {
   Product.find()
     .then((products) => {
-      const isLoggedIn = req.session.isLoggedIn;
       res.render('shop/product-list', {
         prods: products,
         pageTitle: 'All Products',
         path: '/products',
-        isAuthenticate: isLoggedIn
+        isAuthenticate: req.session.isLoggedIn
       });
     }).catch(err => console.log(err));
 };
@@ -17,43 +16,49 @@ exports.getProduct = (req, res, next) => {
   const productId = req.params.productId;
   Product.findById(productId)
     .then(product => {
-      const isLoggedIn = req.session.isLoggedIn;
       res.render('shop/product-detail',
         {
           product: product,
           pageTitle: 'Product details',
           path: '/products',
-          isAuthenticate: isLoggedIn
+          isAuthenticate: req.session.isLoggedIn
         });
     }).catch(err => console.log(err));
 };
 
 exports.getIndex = (req, res, next) => {
   Product.find().then(products => {
-    const isLoggedIn = req.session.isLoggedIn;
     res.render('shop/index', {
       prods: products,
       pageTitle: 'Shop',
       path: '/',
-      isAuthenticate: isLoggedIn
+      isAuthenticate: req.session.isLoggedIn
     });
   }).catch(err => console.error(err));
 };
 
 exports.getCart = (req, res, next) => {
-  req.user.populate('cart.items.productId')
-    .execPopulate()
-    .then(user => {
-      const products = user.cart.items;
-      const isLoggedIn = req.session.isLoggedIn;
-      res.render('shop/cart', {
-        path: '/cart',
-        pageTitle: 'Your Cart',
-        items: products,
-        isAuthenticate: isLoggedIn
-      });
-    })
-    .catch(err => console.log(err));
+  if (req.user) {
+    req.user.populate('cart.items.productId')
+      .execPopulate()
+      .then(user => {
+        const products = user.cart.items;
+        res.render('shop/cart', {
+          path: '/cart',
+          pageTitle: 'Your Cart',
+          items: products,
+          isAuthenticate: req.session.isLoggedIn
+        });
+      })
+      .catch(err => console.log(err));
+  } else {
+    res.render('shop/cart', {
+      path: '/cart',
+      pageTitle: 'Your Cart',
+      items: [],
+      isAuthenticate: req.session.isLoggedIn
+    });
+  }
 };
 
 exports.postOrder = (req, res, next) => {

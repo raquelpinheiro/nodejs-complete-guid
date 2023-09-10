@@ -6,7 +6,8 @@ exports.getAddProduct = (req, res, next) => {
     path: '/admin/add-product',
     formsCSS: true,
     productCSS: true,
-    activeAddProduct: true
+    activeAddProduct: true,
+    isAuthenticate: req.session.isLoggedIn
   });
 };
 
@@ -25,7 +26,6 @@ exports.postAddProduct = (req, res, next) => {
   });
   product.save()
     .then(result => {
-      console.log(result);
       res.redirect('/');
     }).catch(err => console.log(err));
 };
@@ -35,7 +35,8 @@ exports.getProducts = (req, res, next) => {
     res.render('admin/products', {
       prods: products,
       pageTitle: 'Admin Products',
-      path: '/admin/products'
+      path: '/admin/products',
+      isAuthenticate: req.session.isLoggedIn
     });
   }).catch(err => console.log(err));
 };
@@ -50,7 +51,8 @@ exports.getEditProduct = (req, res, next) => {
         path: '/admin/edit-product',
         formsCSS: true,
         productCSS: true,
-        activeAddProduct: true
+        activeAddProduct: true,
+        isAuthenticate: req.session.isLoggedIn
       });
     }).catch(e => console.error(e));
 };

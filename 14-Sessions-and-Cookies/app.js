@@ -34,13 +34,18 @@ app.use(session({
 
 // Adiciona o usuário no contexto da requisição
 app.use((req, res, next) => {
-  User.findOne({ name: 'Raquel' })
-    .then(user => {
-      if (user)
-        req.user = user;
-      next();
-    })
-    .catch(err => console.log(err));
+  if (!req.session.user) {
+    req.session.isLoggedIn = false;
+    next();
+  } else {
+    User.findById(req.session.user._id)
+      .then(user => {
+        if (user)
+          req.user = user;
+        next();
+      })
+      .catch(err => console.log(err));
+  }
 });
 
 app.use('/admin', adminRoutes);
