@@ -125,3 +125,12 @@ Pull and run a MongoDB Docker imagem:
 
 https://www.mongodb.com/compatibility/docker
 https://www.mongodb.com/docs/manual/tutorial/install-mongodb-community-with-docker/
+
+
+## 15-Adding-Authentication ##
+
+- Middleware authentication
+- CSRF protection
+- Middleware to use CSRF token on pages
+- Passwords storage in hash format
+
