@@ -12,8 +12,7 @@ const User = require('./models/user');
 const csrf = require('csurf');
 const flash = require('connect-flash');
 
-const MONGO_DB_HOST = 'mongodbshopnode';
-const MONGODB_URI = `mongodb://${MONGO_DB_HOST}`;
+const MONGODB_URI = 'mongodb://shopnodejs:shopapp@localhost:27017';
 
 const app = express();
 

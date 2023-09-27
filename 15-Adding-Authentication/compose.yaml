@@ -1,0 +1,16 @@
+services:
+  app:
+    image: node:18-alpine
+    command: sh -c "npm install && node app.js"
+    ports:
+      - 127.0.0.1:3000:3000
+    working_dir: /app
+    volumes:
+      - ./:/app
+  mongodb:
+    image: mongodb/mongodb-community-server
+    volumes:
+      - nodejs-shop-mongodb:/etc/databases/mongo-db
+
+volumes:
+  nodejs-shop-mongodb:
