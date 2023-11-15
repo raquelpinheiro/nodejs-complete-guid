@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const fileHelper = require('../util/file');
 
-const { validationResult } = require('express-validator/check');
+const { validationResult } = require('express-validator');
 
 const Product = require('../models/product');
 
