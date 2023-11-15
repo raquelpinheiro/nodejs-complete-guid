@@ -6,7 +6,7 @@
             "name": "Run Script: npm start",
             "request": "launch",
             "command": "npm start",
-            "cwd": "${workspaceFolder}\\17-Advanced-Authentication"
+            "cwd": "${workspaceFolder}\\21-Adding-Pagination"
         }
     ]
 }

@@ -1,0 +1,8 @@
+
+# Run Docker image MongoDB
+
+docker pull mongodb/mongodb-community-server
+
+docker volume create mongo-db
+
+docker run --name mongodb -d -p 27017:27017 --mount type=volume,src=mongo-db,target=/etc/databases -e MONGO_INITDB_ROOT_USERNAME=shopnodejs -e MONGO_INITDB_ROOT_PASSWORD=shopapp mongodb/mongodb-community-server:latest
