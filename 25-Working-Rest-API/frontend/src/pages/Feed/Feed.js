@@ -90,7 +90,7 @@ class Feed extends Component {
     const userId = localStorage.getItem('userId');
     const formData = new FormData();
     formData.append('userId', userId);
-    formData.append('status', 'active');
+    formData.append('status', this.state.status);
 
     fetch(url, {
       method: method,
