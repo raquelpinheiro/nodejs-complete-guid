@@ -22,7 +22,8 @@ class Feed extends Component {
   };
 
   componentDidMount() {
-    fetch('http://localhost:3005/user/status/' + '657b89172490e0bfe3a34172',
+    const userId = localStorage.getItem('userId');
+    fetch('http://localhost:3005/user/status/' + userId,
     {
       headers: {
         Authorization: 'Bearer ' + this.props.token
@@ -86,9 +87,14 @@ class Feed extends Component {
     event.preventDefault();
     let url = 'http://localhost:3005/user/status';
     let method = 'POST';
+    const userId = localStorage.getItem('userId');
+    const formData = new FormData();
+    formData.append('userId', userId);
+    formData.append('status', 'active');
+
     fetch(url, {
       method: method,
-      body: JSON.stringify({userId: '657b89172490e0bfe3a34172', status: 'active'}),
+      body: formData,
       headers: {
         Authorization: 'Bearer ' + this.props.token
       }
@@ -100,7 +106,7 @@ class Feed extends Component {
         return res.json();
       })
       .then(resData => {
-        console.log(resData);
+        this.setState({ status: resData.status });
       })
       .catch(this.catchError);
   };
