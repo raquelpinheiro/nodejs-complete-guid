@@ -3,7 +3,7 @@ const { validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-exports.signup = (req, res, next) => {
+exports.signup = async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         const error = new Error('Validation failed, data is incorret');
@@ -14,27 +14,25 @@ exports.signup = (req, res, next) => {
     const email = req.body.email;
     const name = req.body.name;
     const password = req.body.password;
-    bcrypt.hash(password, 12).then(hashPassword => {
+    try {
+        const hashPassword = await bcrypt.hash(password, 12);
         const user = new User({
             email: email,
             password: hashPassword,
             name: name,
             status: 'new'
         });
-        return user.save();
-    })
-    .then(result => {
-        res.status(200).json({userId: result._id});
-    })
-    .catch(err => {
-        if (!err.statusCode){
+        await user.save();
+        res.status(200).json({ userId: result._id });
+    } catch (err) {
+        if (!err.statusCode) {
             err.statusCode = 500;
         }
         next(err);
-    });
+    };
 };
 
-exports.createLogin = (req, res, next) => {
+exports.createLogin = async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         const error = new Error('Validation failed, data is incorret');
@@ -44,19 +42,19 @@ exports.createLogin = (req, res, next) => {
     }
     const email = req.body.email;
     const password = req.body.password;
-    let user = new User();    
-    User.findOne({email: email})
-    .then(result => {
-        if (!result){
+    let user = new User();
+    try {
+        const userFound = await User.findOne({ email: email });
+        if (!userFound) {
             let error = new Error('User could not found');
             error.statusCode = 401;
             throw error;
         }
         user = result;
-        return bcrypt.compare(password, user.password);
-    }).
-    then(isEqual => {
-        if (!isEqual){
+        const isEqualPassword = await bcrypt.compare(password, user.password);
+
+
+        if (!isEqualPassword) {
             let error = new Error('User could not found');
             error.statusCode = 401;
             throw error;
@@ -67,17 +65,16 @@ exports.createLogin = (req, res, next) => {
         }, 'supersecretsuper', {
             expiresIn: '1h'
         });
-        res.status(200).json({token: token, userId: user._id.toString()});
-    })
-    .catch(err => {
-        if (!err.statusCode){
+        res.status(200).json({ token: token, userId: user._id.toString() });
+    } catch (err) {
+        if (!err.statusCode) {
             err.statusCode = 500;
         }
         next(err);
-    })
+    }
 };
 
-exports.getLogin = (req, res, next) => {
+exports.getLogin = async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         const error = new Error('Validation failed, data is incorret');
@@ -85,15 +82,14 @@ exports.getLogin = (req, res, next) => {
         error.data = errors.array();
         throw error; // por que não next(error)?
     }
-    const userId = req.userId;
-    User.findById(userId)
-    .then(user => {
-        res.status(200).json({status: user.status});
-    })
-    .catch(err => {
-        if (!err.statusCode){
+    try {
+        const userId = req.userId;
+        const user = await User.findById(userId);
+        res.status(200).json({ status: user.status });
+    } catch (err) {
+        if (!err.statusCode) {
             err.statusCode = 500;
         }
         next(err);
-    })
+    }
 };

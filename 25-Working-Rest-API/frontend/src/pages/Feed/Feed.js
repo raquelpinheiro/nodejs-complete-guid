@@ -24,11 +24,11 @@ class Feed extends Component {
   componentDidMount() {
     const userId = localStorage.getItem('userId');
     fetch('http://localhost:3005/user/status/' + userId,
-    {
-      headers: {
-        Authorization: 'Bearer ' + this.props.token
-      }
-    })
+      {
+        headers: {
+          Authorization: 'Bearer ' + this.props.token
+        }
+      })
       .then(res => {
         if (res.status !== 200) {
           throw new Error('Failed to fetch user status.');
@@ -202,11 +202,11 @@ class Feed extends Component {
   deletePostHandler = postId => {
     this.setState({ postsLoading: true });
     fetch('http://localhost:3005/feed/post/' + postId,
-    {
-      headers: {
-        Authorization: 'Bearer ' + this.props.token
-      }
-    })
+      {
+        headers: {
+          Authorization: 'Bearer ' + this.props.token
+        }
+      })
       .then(res => {
         if (res.status !== 200 && res.status !== 201) {
           throw new Error('Deleting a post failed!');
