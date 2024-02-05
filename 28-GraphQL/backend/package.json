@@ -1,29 +1,32 @@
 {
-  "name": "backend",
+  "name": "nodejs-complete-guide",
   "version": "1.0.0",
-  "description": "API that servers the frontend React project",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon app.js"
   },
-  "author": "Raquel de Jesus Pinheiro",
+  "repository": {
+    "type": "git",
+    "url": "https://git-codecommit.us-east-1.amazonaws.com/v1/repos/udemy-course-nodejs-complete"
+  },
+  "author": "",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
-    "body-parser": "^1.20.2",
-    "express": "^4.18.2",
-    "express-validator": "^7.0.1",
-    "graphql": "^16.8.1",
-    "graphql-http": "^1.22.0",
-    "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.0.1",
-    "multer": "^1.4.5-lts.1",
-    "socket.io": "^4.7.3",
-    "uuid": "^9.0.1",
-    "validator": "^13.11.0"
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "express-graphql": "^0.6.12",
+    "express-validator": "^5.3.0",
+    "graphql": "^14.0.2",
+    "jsonwebtoken": "^8.3.0",
+    "mongoose": "^5.3.2",
+    "multer": "^1.4.0",
+    "socket.io": "^2.1.1",
+    "validator": "^10.8.0"
   },
   "devDependencies": {
-    "nodemon": "^3.0.1"
+    "nodemon": "^1.18.4"
   }
 }
